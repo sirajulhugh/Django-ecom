@@ -1,0 +1,82 @@
+{% extends 'page1.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            background: url("{% static 'images/blue-background.jpg' %}") no-repeat center center fixed; 
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        } */
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+        .container img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #87CEFA;
+        }
+        form {
+            width: 100%;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        input {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #f0f0f0;
+        }
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #4682b4;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #4169e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'images/catad.jpg' %}" alt="Add Category">
+        <h1>Add Category</h1>
+        <form method="post" action='{% url "addcategory" %}'>
+            {% csrf_token %}
+            <input type="text" name="name" id="name" placeholder="Category Name" required>
+            <button type="submit">Add Category</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

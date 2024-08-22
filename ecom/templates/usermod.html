@@ -1,0 +1,248 @@
+{% extends 'page2.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+
+    .full-width-carousel {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .carousel-inner {
+        width: 100%;
+        max-height: 600px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .carousel-item {
+        height: 600px;
+    }
+
+    .carousel-image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .product-card {
+        margin: 20px 0;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        text-align: center;
+        padding: 15px;
+        background-color: rgba(0, 255, 255, 0.2);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .btn-add-to-cart {
+        background-color: #499bec;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-to-cart:hover {
+        background-color: #5c3ec6;
+    }
+
+    #floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #499bec;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+    }
+
+    #floating-button:hover {
+        background-color: #5c3ec6;
+    }
+
+    #floating-button img {
+        width: 24px;
+        height: 24px;
+    }
+
+    #menu-links {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    #menu-links.show {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    #menu-links ul {
+        list-style: none;
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    #menu-links ul li {
+        padding: 10px 20px;
+    }
+
+    #menu-links ul li a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+    }
+
+    #menu-links ul li:hover {
+        background-color: #f0f0f0;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="container-fluid full-width-carousel mt-5">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active animate__animated animate__bounceIn">
+                    <img src="{% static 'images/c1.jpeg' %}" class="d-block w-100 carousel-image" alt="...">
+                    <div class="carousel-overlay"></div>
+                </div>
+                <div class="carousel-item animate__animated animate__zoomIn">
+                    <img src="{% static 'images/c2.jpeg' %}" class="d-block w-100 carousel-image" alt="...">
+                    <div class="carousel-overlay"></div>
+                </div>
+                <div class="carousel-item animate__animated animate__slideInLeft">
+                    <img src="{% static 'images/c3.jpeg' %}" class="d-block w-100 carousel-image" alt="...">
+                    <div class="carousel-overlay"></div>
+                </div>
+                <div class="carousel-item animate__animated animate__flipInX">
+                    <img src="{% static 'images/c4.jpeg' %}" class="d-block w-100 carousel-image" alt="...">
+                    <div class="carousel-overlay"></div>
+                </div>
+                <div class="carousel-item animate__animated animate__zoomIn">
+                    <img src="{% static 'images/c5.jpeg' %}" class="d-block w-100 carousel-image" alt="...">
+                    <div class="carousel-overlay"></div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 product-card" data-aos="flip-left">
+                <div class="card">
+                    <img src="{{ product.img.url }}" class="card-img-top" alt="{{ product.productname }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.productname }}</h5>
+                        <p class="card-text">{{ product.category.cat }}</p>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>Rs {{ product.price }}</strong></p>
+                        <a href="{% url 'cart_details' product.id %}" class="btn btn-add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="floating-button" onclick="toggleMenu()">
+        <img src="{% static 'images/page1.jpeg' %}" alt="Menu Icon" />
+    </div>
+
+    <!-- Menu Links -->
+    <div id="menu-links" class="hidden">
+        <ul>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'edit_user' user.id %}">Edit profile</a></li>
+            <li><a href="{% url 'lgout' %}">Log out</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-links');
+            menu.classList.toggle('show');
+        }
+    </script>
+</body>
+{% endblock %}

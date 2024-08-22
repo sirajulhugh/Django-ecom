@@ -1,0 +1,83 @@
+{% extends 'page2.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .product-card {
+        margin: 20px 0;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        text-align: center;
+        padding: 15px;
+        background-color: rgba(0, 255, 255, 0.6); /* Aqua color with 60% opacity */
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .btn-add-to-cart {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-to-cart:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<body>
+<div class="container mt-5">
+    <h2>Products in {{ category.cat }}</h2>
+    <div class="row mt-3">
+        {% for product in products %}
+        <div class="col-md-4 product-card">
+            <div class="card">
+                <img src="{{ product.img.url }}" class="card-img-top" alt="{{ product.productname }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.productname }}</h5>
+                    <p class="card-text">{{ product.category.cat }}</p>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text"><strong>Rs {{ product.price }}</strong></p>
+                    <a href="{% url 'cart_details' product.id %}" class="btn btn-add-to-cart">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+{% endblock %}

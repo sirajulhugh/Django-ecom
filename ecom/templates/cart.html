@@ -1,0 +1,108 @@
+{% extends 'page2.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+<div class="body container my-4">
+    <h1 class="mb-4">Shopping Cart</h1>
+    <div class="row">
+        {% for c in cartitems %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top fixed-size-img" src="{{ c.product.img.url }}" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ c.product.productname }}</h5>
+                    <p class="card-text">{{ c.product.description }}</p>
+                    <p class="card-text">
+                        <i class="bi bi-currency-rupee"></i>{{ c.product.price }}
+                    </p>
+                    <div class="mt-auto">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <form method="post" action="{% url 'decrease_quantity' c.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary btn-sm">-</button>
+                            </form>
+                            <span>{{ c.quantity }}</span>
+                            <form method="post" action="{% url 'increase_quantity' c.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary btn-sm">+</button>
+                            </form>
+                        </div>
+                        <a href="{% url 'remove_cart' c.product.id %}" class="btn btn-danger mb-2">
+                            <i class="bi bi-trash"></i> Remove
+                        </a>
+                        <a href="#" class="btn btn-primary mb-2">
+                            <i class="bi bi-bag"></i> Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="total-price text-end mt-4">
+        <h4>Total: <i class="bi bi-currency-rupee"></i>{{ totalprice }}</h4>
+    </div>
+    <div class="text-end">
+        <a href="{% url 'usermod' user.id %}" class="btn btn-secondary mt-2">
+            <i class="bi bi-arrow-left"></i> Continue Shopping
+        </a>
+        <a href="#" class="btn btn-success mt-2">
+            <i class="bi bi-credit-card"></i> Checkout
+        </a>
+    </div>
+</div>
+<style>
+    .body {
+    background-color: rgba(0, 255, 255, 0.35);
+    padding: 20px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.fixed-size-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+.total-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.text-end {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'page1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            margin: 0;
+        } */
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #4682b4;
+        }
+        form {
+            width: 100%;
+        }
+        label, input, select, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        input, select {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #f0f0f0;
+        }
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #4682b4;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #4169e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Product</h1>
+        <form method="post" action="{% url 'editproduct' product.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <select name="category" required>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == product.category.id %}selected{% endif %}>
+                        {{ category.cat }}
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="text" name="productname" value="{{ product.productname }}" placeholder="Product Name" required>
+            <input type="text" name="description" value="{{ product.description }}" placeholder="Description" required>
+            <input type="number" name="price" value="{{ product.price }}" placeholder="Price" required>
+            <input type="number" name="quantity" value="{{ product.quantity }}" placeholder="Quantity" required>
+            {% if product.img %}
+                    <img src="{{product.img.url}}" alt="Teacher Image" height="100" width="100" class="d-block mb-2">
+                {% endif %}
+            <input class="form-control-file" type="file" id="name6" name="img">
+            <!-- <input type="file" name="img" src="{{product.img.url}}" height="100" width="100"> -->
+            <button type="submit">Update Product</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

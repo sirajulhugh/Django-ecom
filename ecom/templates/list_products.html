@@ -1,0 +1,108 @@
+{% extends 'page1.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .custom-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #4682b4;
+        }
+        .custom-table th {
+            background-color: #4682b4;
+            color: white;
+        }
+        .custom-table td {
+            background-color: #f9f9f9;
+        }
+        .custom-button {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+        .custom-button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-container">
+        <h1>Product List</h1>
+        <div class="table-responsive">
+            <table class="table table-striped custom-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.productname }}</td>
+                        <td>{{ product.category.cat }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>
+                            {% if product.img %}
+                            <img src="{{ product.img.url }}" alt="{{ product.productname }}" class="img-fluid" style="height: 50px;">
+                            {% else %}
+                            No image
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-success custom-button edit-button">
+                                <a href="{% url 'edit_product' product.id %}">Edit</a>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger custom-button delete-button">
+                                <a href="{% url 'deleteproduct' product.id %}">Delete</a>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

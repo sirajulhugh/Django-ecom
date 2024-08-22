@@ -1,0 +1,94 @@
+{% extends 'page1.html' %}
+{% block content %}
+{% load static %}
+    <style>
+        .custom-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin: 50px auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #4682b4;
+        }
+        .custom-table th {
+            background-color: #4682b4;
+            color: white;
+        }
+        .custom-table td {
+            background-color: #f9f9f9;
+        }
+        .custom-button {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+        .custom-button a {
+            color: white;
+            text-decoration: none;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container custom-container">
+        <h1>List of Users</h1>
+        <div class="table-responsive">
+            <table class="table table-striped custom-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Image</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.id }}</td>
+                        <td>{{ account.user.username }}</td>
+                        <td>{{ account.user.email }}</td>
+                        <td>{{ account.contact }}</td>
+                        <td>{{ account.address }}</td>
+                        <td><img src="{{ account.image.url }}" alt="User Image"></td>
+                        <td><button class="btn btn-danger custom-button delete-button"><a href="{% url 'delete_user' account.user.id %}">Delete</a></button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

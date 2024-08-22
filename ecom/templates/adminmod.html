@@ -1,0 +1,184 @@
+{% extends 'page1.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .hero {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .container.section {
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .section h2 {
+        margin-bottom: 15px;
+        font-size: 1.75rem;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .card img {
+        height: 150px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 15px;
+        background-color: rgba(0, 255, 255, 0.2);
+    }
+
+    .card-title {
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            padding: 40px 0;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+        }
+
+        .container.section {
+            padding: 20px 10px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero {
+            padding: 30px 0;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+        }
+
+        .hero p {
+            font-size: 0.85rem;
+        }
+
+        .card img {
+            height: 120px;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            padding: 8px 16px;
+        }
+    }
+</style>
+
+<div class="hero">
+    <h1>Administration</h1>
+    <p>Explore the options below to manage categories, products, and user details.</p>
+</div>
+
+<div class="container section">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'images/catad.jpg' %}" class="card-img-top" alt="Add Category">
+                <div class="card-body">
+                    <h5 class="card-title">Add Category</h5>
+                    <p class="card-text">Easily add new categories to organize your products.</p>
+                    <a href="{% url 'add_category' %}" class="btn"> Add Category</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'images/pro.webp' %}" class="card-img-top" alt="Add Product">
+                <div class="card-body">
+                    <h5 class="card-title">Add Product</h5>
+                    <p class="card-text">Add new products to your inventory with ease.</p>
+                    <a href="{% url 'add_product' %}" class="btn"> Add Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'images/lisp.png' %}" class="card-img-top" alt="List Products">
+                <div class="card-body">
+                    <h5 class="card-title">List of Products</h5>
+                    <p class="card-text">View and manage your current product list.</p>
+                    <a href="{% url 'list_products' %}" class="btn">View Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'images/lisu.jpg' %}" class="card-img-top" alt="View Users">
+                <div class="card-body">
+                    <h5 class="card-title">View User Details</h5>
+                    <p class="card-text">Access detailed information about registered users.</p>
+                    <a href="{% url 'list_users' %}" class="btn">View Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

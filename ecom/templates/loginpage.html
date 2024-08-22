@@ -1,0 +1,146 @@
+{% extends 'page3.html' %}
+{% block content %}
+{% load static %}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* body {
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        } */
+
+        .container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 360px;
+            max-width: 100%;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border-radius: 4px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        header img {
+            height: 50px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form input {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        form button {
+            border-radius: 4px;
+            border: none;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        form button:hover {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+        }
+
+        .link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #0072ff;
+            text-decoration: none;
+        }
+
+        .alert {
+            margin-top: 20px;
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        footer a {
+            color: #0072ff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="{% static 'images/si.webp' %}" alt="Institution Logo">
+            <h1>Sign In</h1>
+        </header>
+        <form action="{% url 'log' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Username" name="usname" required />
+            <input type="password" placeholder="Password" name="passd" required />
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="link">
+            <p>Don't have an account? <a href="{% url 'signuppage' %}">Sign Up</a></p>
+        </div>
+        {% for msg in messages %}
+        <div class="alert">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        <footer>
+            &copy; 2024 Academic Institution | <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a>
+        </footer>
+    </div>
+</body>
+</html>
+{% endblock %}
